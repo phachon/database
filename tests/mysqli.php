@@ -25,26 +25,26 @@ $config = array(
 //create a db object
 $db = Database::instance('default', $config);
 
-//// select data return array
-//$resultArray = $db->query("select * from test_account")
-//	->as_array();
-//
-//// select data return object
-//require_once 'Model/TestModel.php';
-//$resultObject = $db->query("select * from test_account")
-//	->as_object("TestModel");
-//
-//// insert data return insertId
-//$insertId = $db->query("INSERT INTO test_account (name, given_name, password, phone, mobile, email, status, create_time, update_time) VALUES ('roota', 'roaadot1', '96e79218965eb72c92a549dd5a330112', '', '', 'phachon@163.com', 0, 1471512945, 1471593345)")
-//	->insertId();
-//
-//// update data return affected_rows
-//$affectedRows = $db->query("UPDATE test_account set mobile=12345167867")
-//	->affectedRows();
-//
-//// delete data return affected_rows
-//$affectedRows = $db->query("DELETE FROM test_account WHERE name='roota'")
-//	->affectedRows();
+// select data return array
+$resultArray = $db->query("select * from test_account")
+	->as_array();
+
+// select data return object
+require_once 'Model/TestModel.php';
+$resultObject = $db->query("select * from test_account")
+	->as_object("TestModel");
+
+// insert data return insertId
+$insertId = $db->query("INSERT INTO test_account (name, given_name, password, phone, mobile, email, status, create_time, update_time) VALUES ('roota', 'roaadot1', '96e79218965eb72c92a549dd5a330112', '', '', 'phachon@163.com', 0, 1471512945, 1471593345)")
+	->insertId();
+
+// update data return affected_rows
+$affectedRows = $db->query("UPDATE test_account set mobile=12345167867")
+	->affectedRows();
+
+// delete data return affected_rows
+$affectedRows = $db->query("DELETE FROM test_account WHERE name='roota'")
+	->affectedRows();
 
 // transaction
 $db->begin();
