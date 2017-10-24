@@ -90,7 +90,9 @@ class Mysqli extends Database implements TypeInterface {
 		}
 		
 		$this->_mysqlResult = $mysqlResult;
-		$this->_result = $this->_fetchArray();
+		if($this->_mysqlResult instanceof \mysqli_result) {
+			$this->_result = $this->_fetchArray();
+		}
 		
 		return $this;
 	}
@@ -223,23 +225,5 @@ class Mysqli extends Database implements TypeInterface {
 			$status = !is_resource($this->_conn);
 		}
 		return $status;
-	}
-
-	/**
-	 * close conn
-	 */
-	protected function _close() {
-		if($this->_conn && is_resource($this->_conn)) {
-			if($this->_conn->close()) {
-				$this->_conn = NULL;
-			};
-		}
-	}
-
-	/**
-	 * destruct
-	 */
-	public function __destruct() {
-		$this->_close();
 	}
 }

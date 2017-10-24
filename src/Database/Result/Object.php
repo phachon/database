@@ -1,6 +1,6 @@
 <?php
 /**
- * Database Result
+ * Database Result Object
  * @package  Database\Result
  * @category Object
  * @author   phachon@163.com

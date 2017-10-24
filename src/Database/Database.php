@@ -80,6 +80,30 @@ abstract class Database implements DatabaseInterface {
 	public function disconnect() {
 		unset(self::$_instances[$this->_name]);
 	}
+
+	/**
+	 * 处理输入数据
+	 * @param $value
+	 * @return int|string
+	 */
+	public function valid($value) {
+		if($value === NULL) {
+			return 'NULL';
+		}elseif ($value === TRUE) {
+			return "'1'";
+		}elseif ($value === FALSE) {
+			return "'0'";
+		}elseif (is_int($value)) {
+			return (int)$value;
+		}elseif (is_float($value)) {
+			return sprintf('%F', $value);
+		}elseif (is_array($value)) {
+			$values = array_map(array($this, __FUNCTION__), $value);
+			return '('.implode(',', $values).')';
+		}
+		
+		return $this->escape($value);
+	}
 	
 	/**
 	 * as_array

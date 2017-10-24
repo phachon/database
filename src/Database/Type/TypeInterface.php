@@ -1,8 +1,8 @@
 <?php
 /**
- * Database interface
- * @package  Database
- * @category Database\Interface
+ * Database type interface
+ * @package  Database\Type
+ * @category Interface
  * @author   phachon@163.com
  * @copyright (c) 2017 phachon
  * @license  MIT

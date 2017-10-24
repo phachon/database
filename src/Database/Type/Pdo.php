@@ -1,8 +1,11 @@
 <?php
 /**
- *
- * @author: panchao
- * Time: 16:27
+ * Database Pdo
+ * @package  Database\Type
+ * @category Pdo
+ * @author   phachon@163.com
+ * @copyright (c) 2017 phachon
+ * @license  MIT
  */
 
 namespace Database\Type;
@@ -52,12 +55,8 @@ class Pdo extends Database implements TypeInterface {
 			$options[\PDO::ATTR_PERSISTENT] = TRUE;
 		}
 
-//		if(!empty($this->_config['charset'])) {
-//			$options[\PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES ".$this->_config['charset'];
-//		}
-
 		try {
-			$this->_conn = new \PDO($dns, $username, $password, $options);
+			$this->_conn = new \PDO($dsn, $username, $password, $options);
 		} catch (\PDOException $e) {
 			throw new Exception($e);
 		}
@@ -74,8 +73,7 @@ class Pdo extends Database implements TypeInterface {
 	 */
 	public function charset($charset) {
 		if ($this->_conn == NULL) $this->connect();
-		//TODO charset escape()
-		$this->_conn->exec("SET NAMES ".$this->_config['charset']);
+		$this->_conn->exec("SET NAMES ".$this->valid($this->_config['charset']));
 	}
 
 	/**
@@ -94,7 +92,11 @@ class Pdo extends Database implements TypeInterface {
 		}
 
 		$this->_mysqlResult = $mysqlResult;
-		$this->_result = $this->_mysqlResult->fetchAll();
+		if(stripos($sql, 'select') === 0) {
+			$this->_result = $this->_mysqlResult->fetchAll();
+		}
+
+		return $this;
 	}
 
 	/**
@@ -140,7 +142,7 @@ class Pdo extends Database implements TypeInterface {
 	 * @return mixed
 	 */
 	public function affectedRows() {
-		return $this->_conn->rowCount();
+		return $this->_mysqlResult->rowCount();
 	}
 
 	/**

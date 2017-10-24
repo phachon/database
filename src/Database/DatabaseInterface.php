@@ -1,8 +1,11 @@
 <?php
 /**
- *
- * @author: panchao
- * Time: 15:57
+ * Database interface
+ * @package  Database
+ * @category Interface
+ * @author   phachon@163.com
+ * @copyright (c) 2017 phachon
+ * @license  MIT
  */
 
 namespace Database;
@@ -31,6 +34,13 @@ interface DatabaseInterface {
 	 */
 	public function disconnect();
 
+	/**
+	 * 处理输入数据
+	 * @param $value
+	 * @return mixed
+	 */
+	public function valid($value);
+	
 	/**
 	 * as_array
 	 * @param null $key
