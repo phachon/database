@@ -1,8 +1,7 @@
 <?php
 /**
- *
- * @author: panchao
- * Time: 13:42
+ * Database Test
+ * @author: phachon@163.com
  */
 
 namespace Database;
